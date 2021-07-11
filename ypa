@@ -5,11 +5,6 @@ if __name__ == '__main__':
     from dicttoxml import dicttoxml
 
 
-    # import sqlalchemy
-    # import codecs
-    # import re
-    # import xlrd
-
     def xlsx_to_csv(file):
         my_df = pd.read_excel(f'{file}', sheet_name='Vehicles', dtype=str)
         my_df.to_csv(f'{file.replace(".xlsx", ".csv")}', index=None, header=True)
@@ -117,7 +112,7 @@ if __name__ == '__main__':
         xml_counter = 0
         xml_df = []
 
-        for _i, z in enumerate(nvm['score']):  # ??????????????????????????????????????????
+        for _i, z in enumerate(nvm['score']):
             if int(z) > 3:
                 # to json
                 json_counter += 1
@@ -148,8 +143,6 @@ if __name__ == '__main__':
 
     def s3db_to_xml(file, _xml_df, _counter):
         with open(file.replace(".s3db", ".xml"), 'w') as opened_file:
-            # df.replace('<?xml version="1.0" encoding="UTF-8" ?>', '')
-            # df_for_xml[0] = ''
             _xml = dicttoxml(_xml_df, custom_root='convoy',
                              attr_type=False, item_func=lambda x: 'vehicle')
             good_xml = str(_xml)[2:-1].replace('<?xml version="1.0" encoding="UTF-8" ?>', '')
